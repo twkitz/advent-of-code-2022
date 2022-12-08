@@ -1,23 +1,15 @@
 package helper
 
 import (
-	"bufio"
-	"os"
+	"github.com/twkitz/advent-of-code-2022/utils"
 )
 
 func GetGrid(filePath string) (*Grid, error) {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+	content := utils.GetFileContent(filePath)
 	grid := Grid{treeHeights: [][]int{}}
 
-	for scanner.Scan() {
-		input := scanner.Text()
-		grid.AddRow(input)
+	for _, line := range content {
+		grid.AddRow(line)
 	}
 
 	return &grid, nil
