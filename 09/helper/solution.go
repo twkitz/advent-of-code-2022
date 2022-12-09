@@ -15,31 +15,22 @@ func GetAnswerPart1(filePath string) int {
 	for _, line := range content {
 		command := strings.Split(line, " ")
 		step, _ := strconv.Atoi(command[1])
-		switch command[0] {
-		case "U":
-			for i := 0; i < step; i++ {
+		for i := 0; i < step; i++ {
+			switch command[0] {
+			case "U":
 				rope.MoveUp()
-				positionLog[rope.GetTailPosition()] = true
-			}
-			break
-		case "D":
-			for i := 0; i < step; i++ {
+				break
+			case "D":
 				rope.MoveDown()
-				positionLog[rope.GetTailPosition()] = true
-			}
-			break
-		case "L":
-			for i := 0; i < step; i++ {
+				break
+			case "L":
 				rope.MoveLeft()
-				positionLog[rope.GetTailPosition()] = true
-			}
-			break
-		case "R":
-			for i := 0; i < step; i++ {
+				break
+			case "R":
 				rope.MoveRight()
-				positionLog[rope.GetTailPosition()] = true
+				break
 			}
-			break
+			positionLog[rope.GetTailPosition()] = true
 		}
 	}
 	return len(positionLog)
