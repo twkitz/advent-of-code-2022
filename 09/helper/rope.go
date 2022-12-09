@@ -36,15 +36,31 @@ func (rope *Rope) MoveRight() {
 func (rope *Rope) UpdateTailPosition() {
 	if rope.headX == rope.tailX-2 {
 		rope.tailX -= 1
-		rope.tailY = rope.headY
+		if rope.headY > rope.tailY {
+			rope.tailY += 1
+		} else if rope.headY < rope.tailY {
+			rope.tailY -= 1
+		}
 	} else if rope.headX == rope.tailX+2 {
 		rope.tailX += 1
-		rope.tailY = rope.headY
+		if rope.headY > rope.tailY {
+			rope.tailY += 1
+		} else if rope.headY < rope.tailY {
+			rope.tailY -= 1
+		}
 	} else if rope.headY == rope.tailY-2 {
 		rope.tailY -= 1
-		rope.tailX = rope.headX
+		if rope.headX > rope.tailX {
+			rope.tailX += 1
+		} else if rope.headX < rope.tailX {
+			rope.tailX -= 1
+		}
 	} else if rope.headY == rope.tailY+2 {
 		rope.tailY += 1
-		rope.tailX = rope.headX
+		if rope.headX > rope.tailX {
+			rope.tailX += 1
+		} else if rope.headX < rope.tailX {
+			rope.tailX -= 1
+		}
 	}
 }

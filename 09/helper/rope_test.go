@@ -105,7 +105,7 @@ func TestUpdateTailPosition(t *testing.T) {
 		rope := Rope{tc.headX, tc.headY, 0, 0}
 		rope.UpdateTailPosition()
 		if rope.tailX != tc.wantX || rope.tailY != tc.wantY {
-			t.Error(fmt.Sprintf(`want: %d,%d -> got: %d,%d`, tc.wantX, tc.wantY, rope.tailX, rope.tailY))
+			t.Error(fmt.Sprintf(`headX: %d, headY: %d, want: %d,%d -> got: %d,%d`, tc.headX, tc.headY, tc.wantX, tc.wantY, rope.tailX, rope.tailY))
 		}
 	}
 }

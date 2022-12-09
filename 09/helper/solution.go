@@ -44,3 +44,49 @@ func GetAnswerPart1(filePath string) int {
 	}
 	return len(positionLog)
 }
+
+func GetAnswerPart2(filePath string) int {
+	content := utils.GetFileContent(filePath)
+	knots := 9
+	rope := make([]Rope, knots)
+	positionLog := make(map[string]bool)
+	positionLog[rope[0].GetTailPosition()] = true
+	for _, line := range content {
+		command := strings.Split(line, " ")
+		step, _ := strconv.Atoi(command[1])
+		for i := 0; i < step; i++ {
+			switch command[0] {
+			case "U":
+				rope[0].MoveUp()
+				break
+			case "D":
+				rope[0].MoveDown()
+				break
+			case "L":
+				rope[0].MoveLeft()
+				break
+			case "R":
+				rope[0].MoveRight()
+				break
+			}
+			rope[1].headX = rope[0].tailX
+			rope[1].headY = rope[0].tailY
+			for j := 1; j < knots; j++ {
+				oldTailPosition := rope[j].GetTailPosition()
+				rope[j].UpdateTailPosition()
+				newTailPosition := rope[j].GetTailPosition()
+				if newTailPosition == oldTailPosition {
+					break
+				}
+				if j < knots-1 {
+					rope[j+1].headX = rope[j].tailX
+					rope[j+1].headY = rope[j].tailY
+				}
+				if j == knots-1 {
+					positionLog[newTailPosition] = true
+				}
+			}
+		}
+	}
+	return len(positionLog)
+}
