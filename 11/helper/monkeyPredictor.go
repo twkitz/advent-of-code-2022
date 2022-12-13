@@ -8,7 +8,8 @@ import (
 )
 
 type MonkeyPredictor struct {
-	monkeys []*Monkey
+	monkeys          []*Monkey
+	totalTestOperand int
 }
 
 func (mp MonkeyPredictor) GetReport() string {
@@ -24,7 +25,7 @@ func (mp *MonkeyPredictor) Run() {
 	for _, monkey := range mp.monkeys {
 		for len(monkey.items) > 0 {
 			target, worryLevel := monkey.Operate()
-			mp.monkeys[target].items = append(mp.monkeys[target].items, worryLevel)
+			mp.monkeys[target].items = append(mp.monkeys[target].items, worryLevel%mp.totalTestOperand)
 			monkey.items = monkey.items[1:]
 			monkey.inspectedCount++
 		}

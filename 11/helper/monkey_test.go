@@ -58,6 +58,7 @@ func TestOperate(t *testing.T) {
 			tc.targetWhenBoredTrue,
 			tc.targetWhenBoredFalse,
 			1,
+			3,
 		}
 
 		gotTarget, gotWorryLevel := monkey.Operate()

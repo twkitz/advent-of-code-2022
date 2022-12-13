@@ -12,6 +12,7 @@ type Monkey struct {
 	targetWhenBoredTrue  int
 	targetWhenBoredFalse int
 	inspectedCount       int
+	worryDivider         int
 }
 
 func (m Monkey) Operate() (int, int) {
@@ -25,9 +26,9 @@ func (m Monkey) Operate() (int, int) {
 	}
 	switch m.operator {
 	case "+":
-		newWorryLevel = (oldWorryLevel + operand) / 3
+		newWorryLevel = (oldWorryLevel + operand) / m.worryDivider
 	case "*":
-		newWorryLevel = (oldWorryLevel * operand) / 3
+		newWorryLevel = (oldWorryLevel * operand) / m.worryDivider
 	}
 	if newWorryLevel%m.testBoredOperand == 0 {
 		return m.targetWhenBoredTrue, newWorryLevel

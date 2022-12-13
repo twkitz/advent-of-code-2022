@@ -8,8 +8,8 @@ import (
 
 func main() {
 	part1 := helper.GetAnswerPart1("input.txt")
-	fmt.Println("part1: ", part1)
+	fmt.Println("part1:", part1)
 
-	// part2 := helper.GetAnswerPart2("input.txt")
-	// fmt.Printf("part2: \n" + part2)
+	part2 := helper.GetAnswerPart2("input.txt")
+	fmt.Println("part2:", part2)
 }

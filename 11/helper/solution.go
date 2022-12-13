@@ -7,12 +7,13 @@ import (
 	"github.com/twkitz/advent-of-code-2022/utils"
 )
 
-func GetAnswerPart1(filePath string) int {
+func GetAnswer(filePath string, roundCount, worryDivider int) int {
 	content := utils.GetFileContent(filePath)
-	mp := MonkeyPredictor{[]*Monkey{}}
+	mp := MonkeyPredictor{[]*Monkey{}, 0}
+	totalTestOperand := 1
 	for lineNo := 0; lineNo < len(content); lineNo++ {
 		if strings.HasPrefix(content[lineNo], "Monkey ") {
-			monkey := Monkey{}
+			monkey := Monkey{worryDivider: worryDivider}
 			lineNo++
 			for lineNo < len(content) && content[lineNo] != "" {
 				if strings.HasPrefix(content[lineNo], "  Starting items: ") {
@@ -41,10 +42,12 @@ func GetAnswerPart1(filePath string) int {
 				lineNo++
 			}
 			mp.monkeys = append(mp.monkeys, &monkey)
+			totalTestOperand *= monkey.testBoredOperand
 		}
 	}
+	mp.totalTestOperand = totalTestOperand
 
-	for i := 0; i < 20; i++ {
+	for i := 0; i < roundCount; i++ {
 		mp.Run()
 	}
 
@@ -61,4 +64,12 @@ func GetAnswerPart1(filePath string) int {
 	}
 
 	return top1 * top2
+}
+
+func GetAnswerPart1(filePath string) int {
+	return GetAnswer(filePath, 20, 3)
+}
+
+func GetAnswerPart2(filePath string) int {
+	return GetAnswer(filePath, 10000, 1)
 }
