@@ -148,3 +148,20 @@ func TestGetAnswerPart1_1(t *testing.T) {
 		t.Errorf("want: %d, got: %d", want, got)
 	}
 }
+
+func TestGetDistressPosition(t *testing.T) {
+	wantedX := 14
+
+	gotX := GetDistressPositionX("../example.txt", 11)
+	if gotX != wantedX {
+		t.Errorf("want: %d, got: %d", wantedX, gotX)
+	}
+}
+
+func TestGetAnswerPart2(t *testing.T) {
+	want := 56000011
+	got := GetAnswerPart2("../example.txt", 0, 20)
+	if got != want {
+		t.Errorf("want: %d, got: %d", want, got)
+	}
+}

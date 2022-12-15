@@ -59,10 +59,6 @@ func GetUnavailableInLine(s Sensor, line int) (int, int) {
 }
 
 func MinifyAreas(areas [][2]int) [][2]int {
-	// for _, a := range areas {
-	// 	fmt.Printf("%d\t%d\n", a[0], a[1])
-	// }
-	// fmt.Println()
 	minifiedAreas := [][2]int{areas[0]}
 	for i := 1; i < len(areas); i++ {
 		isMerged := false
@@ -121,4 +117,36 @@ func GetAnswerPart1_1(filePath string, y int) int {
 		sum += area[1] - area[0]
 	}
 	return sum
+}
+
+func GetDistressPositionX(filePath string, y int) int {
+	content := utils.GetFileContent(filePath)
+	unavailableInLine := [][2]int{}
+	for _, input := range content {
+		sX, sY, bX, bY := ReadInput(input)
+		min, max := GetUnavailableInLine(Sensor{sX, sY, bX, bY}, y)
+		if min <= max {
+			unavailableInLine = append(unavailableInLine, [2]int{min, max})
+		}
+	}
+	minifiedAreas := MinifyAreas(unavailableInLine)
+	x := math.MinInt
+	if len(minifiedAreas) == 2 {
+		if minifiedAreas[0][1] < minifiedAreas[1][0] {
+			x = minifiedAreas[0][1] + 1
+		} else {
+			x = minifiedAreas[1][1] + 1
+		}
+	}
+	return x
+}
+
+func GetAnswerPart2(filePath string, from, to int) int {
+	for y := from; y <= to; y++ {
+		x := GetDistressPositionX(filePath, y)
+		if x != math.MinInt {
+			return (x * 4000000) + y
+		}
+	}
+	return 0
 }

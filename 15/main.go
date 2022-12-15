@@ -9,4 +9,7 @@ import (
 func main() {
 	part1 := helper.GetAnswerPart1_1("input.txt", 2000000)
 	fmt.Println("part1:", part1)
+
+	part2 := helper.GetAnswerPart2("input.txt", 0, 4000000)
+	fmt.Println("part2:", part2)
 }
